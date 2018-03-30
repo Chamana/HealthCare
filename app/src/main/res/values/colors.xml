@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0F1821</color>
+    <color name="colorPrimaryDark">#09131D</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="appBackground">#1D262F</color>
+    <color name="cardBackground">#2C3239</color>
+    <color name="sendMessageLayoutColor">#182027</color>
+
+    //Chat Colors
+    <color name="chatMessageUnread">#02b26c</color>
+    <color name="chatMessageRose">#ba0b4a</color>
+    <color name="chatMessageBlue">#4E2BA5</color>
+</resources>

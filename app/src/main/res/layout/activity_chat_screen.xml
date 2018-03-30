@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    tools:context="com.adghealthcare.activity.ChatScreen">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:elevation="6dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <ImageView
+                android:id="@+id/imageView_toolbar_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back"
+                android:layout_marginLeft="10dp"
+                android:onClick="back_onClick"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="9"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/textView_activity_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/white"
+                        android:text="Software Project Management"/>
+
+                    <TextView
+                        android:id="@+id/textView_activity_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:textSize="12dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/white"
+                        android:text="Chatroom"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_above="@+id/relativeLayout_msg"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/sendMessageLayoutColor">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button_send">
+            <EditText
+                android:id="@+id/editText_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="7dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:drawablePadding="100dp"
+                android:layout_gravity="center"
+                android:inputType="textCapSentences|textMultiLine"
+                android:hint="Type a message..."
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@drawable/chat_editext_border"
+                android:maxLength="300"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp"
+                android:textColor="@android:color/white"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/send_message"
+            android:onClick="sendMessage"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

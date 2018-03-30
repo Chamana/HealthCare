@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "444847416140",
+    "firebase_url": "https://adghack-68fd7.firebaseio.com",
+    "project_id": "adghack-68fd7",
+    "storage_bucket": "adghack-68fd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444847416140:android:ff7c4f0981842265",
+        "android_client_info": {
+          "package_name": "com.adghealthcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444847416140-str9t4uajo4mtb90ha6rv95m6fect7so.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBglTA8K1TdCgLX_3y6YTANaW_wfyrVJEU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

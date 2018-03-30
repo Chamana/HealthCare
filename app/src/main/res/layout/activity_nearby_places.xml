@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    android:orientation="vertical"
+    tools:context="com.adghealthcare.activity.ChatroomScreen">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:elevation="6dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:id="@+id/imageView_toolbar_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back"
+            android:layout_marginLeft="10dp"
+            android:onClick="back_onClick"/>
+
+        <TextView
+            android:id="@+id/textView_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:text="Nearby Places"/>
+
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/hospitals_tv"
+            android:text="Hospitals"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:onClick="showHospitals"/>
+        <TextView
+            android:id="@+id/restaurant_tv"
+            android:text="Restaurants"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:onClick="showRestaurants"/>
+    </LinearLayout>
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapFragment"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
