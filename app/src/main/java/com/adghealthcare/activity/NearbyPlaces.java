@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +70,8 @@ public class NearbyPlaces extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         this.googleMap=googleMap;
-        showHospitals((LinearLayout)findViewById(R.id.ll_hos));
+        TextView hos_tv=(TextView)findViewById(R.id.hospitals_tv);
+        hos_tv.performClick();
     }
 
     public boolean isPermissionGiven(){
