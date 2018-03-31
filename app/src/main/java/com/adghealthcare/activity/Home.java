@@ -154,7 +154,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
                         break;
                     case R.id.nav_diagnosis:
                         drawerLayout.closeDrawers();
-                        Toast.makeText(context, "nav_diagnosis", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),ChatBot.class));
                         break;
                     case R.id.nav_family:
                         drawerLayout.closeDrawers();
