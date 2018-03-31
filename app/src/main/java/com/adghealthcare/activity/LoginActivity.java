@@ -62,6 +62,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         usernames=new ArrayList<>();
         sharedPreferences=getApplicationContext().getSharedPreferences("hc",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
+        if(sharedPreferences.getString("uid","").length()>0){
+            startActivity(new Intent(this,Home.class));
+            finish();
+        }
     }
 
     private boolean checkUserPermission() {

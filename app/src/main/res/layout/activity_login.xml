@@ -6,26 +6,31 @@
     android:orientation="vertical"
     android:background="@color/appBackground"
     android:weightSum="1">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.45">
+
         <ImageView
             android:id="@+id/logo_iv"
-            android:src="@android:color/holo_green_dark"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/hackathon_logo1" />
+
         <TextView
             android:id="@+id/appname_tv"
-            android:text="Health Care"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo_iv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:textColor="@color/colorAccent"
-            android:textAppearance="?android:textAppearanceMedium"/>
+            android:text="@string/app_name"
+            android:visibility="gone"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
     <LinearLayout
@@ -49,9 +54,9 @@
                 android:gravity="center"
                 android:maxLength="10"
                 android:inputType="text"
-                android:backgroundTint="@color/colorAccent"
-                android:textColorHint="@color/colorAccent"
-                android:textColor="@color/colorAccent"/>
+                android:backgroundTint="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -66,25 +71,27 @@
                 android:id="@+id/password_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="@android:color/white"
+                android:gravity="center"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLength="15"
-                android:gravity="center"
-                android:backgroundTint="@color/colorAccent"
-                android:textColorHint="@color/colorAccent"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/login_btn"
-            android:text="Login"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cardBackground"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="75dp"
-            android:layout_marginRight="75dp"/>
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_bgk"
+            android:text="Login"
+            android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:id="@+id/signup_tv"
             android:text="Don't have account? Sign up here."
@@ -93,7 +100,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
 </LinearLayout>

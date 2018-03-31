@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/hackathon_logo1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/hackathon_logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -24,16 +24,20 @@
         <service android:name=".service.LocationService" />
 
         <activity android:name=".activity.ChatroomScreen" />
-        <activity
-            android:name=".activity.ChatScreen"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.Home">
+        <activity android:name=".activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.SignupActivity" />
+        <activity
+            android:name=".activity.ChatScreen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.Home">
+
         </activity>
         <activity android:name=".activity.NearbyPlaces"></activity>
 

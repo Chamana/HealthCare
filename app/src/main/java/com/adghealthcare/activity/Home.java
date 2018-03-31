@@ -1,6 +1,7 @@
 package com.adghealthcare.activity;
 
 import android.*;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,7 +33,13 @@ import android.widget.Toast;
 import com.adghealthcare.*;
 import com.adghealthcare.Manifest;
 import com.adghealthcare.R;
+import com.adghealthcare.connection.FirebaseMessageRequest;
+import com.adghealthcare.data_model.User_Location;
 import com.adghealthcare.service.LocationService;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -51,6 +58,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -85,18 +93,19 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
     int red=0x88FF5733;
     int green=0x77b6feb6;
 
+    List<String> firebase_tokens=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sharedPreferences=getSharedPreferences("vit_companion", Context.MODE_PRIVATE);
+        sharedPreferences=getSharedPreferences("hc", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         placeRef=firebaseDatabase.getReference("place/");
         String firebase_token=FirebaseInstanceId.getInstance().getToken();
-        Toast.makeText(context, firebase_token, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, firebase_token, Toast.LENGTH_SHORT).show();
         System.out.print("\n\n\n"+firebase_token+"\n\n\n");
 
         drawerLayout=(DrawerLayout)findViewById(R.id.drawerLayout);
@@ -110,7 +119,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
         mapFragment.getMapAsync(this);
         if(isPermissionGiven()){
             startService(new Intent(this, LocationService.class));
-            Toast.makeText(context, "service started", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "service started", Toast.LENGTH_SHORT).show();
         }
         else{
             requestPermission();
@@ -125,7 +134,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
         circularImageView_dp=(CircularImageView)navigationView.getHeaderView(0).findViewById(R.id.circularImageView_dp);
 
         textView_name=(TextView)navigationView.getHeaderView(0).findViewById(R.id.textView_name);
-        textView_name.setText(sharedPreferences.getString("name","Gopalakrishnan V"));
+        textView_name.setText(myUID.toUpperCase());
 
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.nav_menu);
@@ -153,19 +162,21 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
                         break;
                     case R.id.nav_chatrooms:
                         drawerLayout.closeDrawers();
-                        Toast.makeText(context, "nav_chatrooms", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),ChatroomScreen.class));
                         break;
                     case R.id.nav_live_feed:
                         drawerLayout.closeDrawers();
-                        Toast.makeText(context, "nav_live_feed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Live Feed Coming soon", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_sos:
                         drawerLayout.closeDrawers();
-                        Toast.makeText(context, "nav_sos", Toast.LENGTH_SHORT).show();
+                        sendEmergencyMessage();
                         break;
                     case R.id.nav_logout:
                         drawerLayout.closeDrawers();
-                        Toast.makeText(context, "nav_logout", Toast.LENGTH_SHORT).show();
+                        editor.clear();
+                        editor.commit();
+                        startActivity(new Intent(Home.this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK));
                         break;
                     default:
                         drawerLayout.closeDrawers();
@@ -184,7 +195,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     public void updateUI(String latLong_new){
-        Toast.makeText(context, latLong_new, Toast.LENGTH_SHORT).show();
         if(latLong_new.length()==0){
             return;
         }
@@ -286,8 +296,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 int count=0;
+                                firebase_tokens.clear();
                                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.getValue().toString().equals("safe")){
+                                    User_Location ulocation=ds.getValue(User_Location.class);
+                                    firebase_tokens.add(ulocation.getFtoken());
+                                    if(ulocation.getStatus().equals("safe")){
                                         count++;
                                     }
                                     else{
@@ -305,7 +318,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
                                 else{
                                     circleOptions.fillColor(yellow);
                                 }
-                                Toast.makeText(context, count+"", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, count+"", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -343,7 +356,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 imageView_zone.setImageResource(R.drawable.checked);
-                placeRef.child(city).child(myUID).setValue("safe");
+                placeRef.child(city).child(myUID).setValue(new User_Location("safe",FirebaseInstanceId.getInstance().getToken()));
                 dialog.cancel();
             }
         });
@@ -351,11 +364,44 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 imageView_zone.setImageResource(R.drawable.close);
-                placeRef.child(city).child(myUID).setValue("danger");
+                placeRef.child(city).child(myUID).setValue(new User_Location("danger",FirebaseInstanceId.getInstance().getToken()));
                 dialog.cancel();
             }
         });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+
+    public void sendEmergencyMessage(){
+        if(firebase_tokens.size()>0){
+            /*final ProgressDialog progressDialog=new ProgressDialog(getApplicationContext());
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Sending notification to near by people");
+            progressDialog.show();*/
+
+            Response.Listener<String> responseListener=new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //progressDialog.cancel();
+                    Toast.makeText(context, "Notification sent successfully", Toast.LENGTH_SHORT).show();
+                }
+            };
+
+            Response.ErrorListener errorListener=new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //progressDialog.cancel();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            };
+
+            FirebaseMessageRequest firebaseMessageRequest=new FirebaseMessageRequest("http://192.168.43.20:3000/api/notify",responseListener,errorListener,"Crysis Escape alert",myUID+" is in need of help",firebase_tokens);
+            RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(firebaseMessageRequest);
+        }
+        else{
+            Toast.makeText(context, "No near by persons available", Toast.LENGTH_SHORT).show();
+        }
     }
 }

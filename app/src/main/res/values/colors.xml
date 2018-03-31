@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#0F1821</color>
     <color name="colorPrimaryDark">#09131D</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff0095</color>
     <color name="appBackground">#1D262F</color>
     <color name="cardBackground">#2C3239</color>
     <color name="sendMessageLayoutColor">#182027</color>

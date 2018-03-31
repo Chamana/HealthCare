@@ -103,7 +103,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                     public void onSuccess(Void aVoid) {
                                         editor.putString("uid",username_et.getText().toString());
                                         editor.commit();
-                                        startActivity(new Intent(SignupActivity.this, Home.class));
+                                        startActivity(new Intent(SignupActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                         public void onSuccess(Void aVoid) {
                                             editor.putString("uid",username_et.getText().toString());
                                             editor.commit();
-                                            startActivity(new Intent(SignupActivity.this, Home.class));
+                                            startActivity(new Intent(SignupActivity.this, Home.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -148,6 +148,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "Signup is clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.backarrow_iv:
+                super.onBackPressed();
                 break;
         }
     }

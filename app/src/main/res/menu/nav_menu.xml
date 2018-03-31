@@ -5,34 +5,34 @@
     <item
         android:id="@+id/nav_home"
         android:title="HOME"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/home"/>
     <item
         android:id="@+id/nav_near_by"
         android:title="NEAR BY PLACES"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/loc"/>
     <item
         android:id="@+id/nav_diagnosis"
         android:title="DIAGNOSIS"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/diag"/>
     <item
         android:id="@+id/nav_family"
         android:title="FAMILY GROUPS"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/family"/>
     <item
         android:id="@+id/nav_chatrooms"
         android:title="CHAT ROOMS"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/chat"/>
     <item
         android:id="@+id/nav_live_feed"
         android:title="LIVE FEED"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/post"/>
     <item
         android:id="@+id/nav_sos"
         android:title="SOS"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/sos"/>
     <item
         android:id="@+id/nav_logout"
         android:title="LOGOUT"
-        android:icon="@drawable/arrow_back"/>
+        android:icon="@drawable/logout"/>
 
 </menu>
